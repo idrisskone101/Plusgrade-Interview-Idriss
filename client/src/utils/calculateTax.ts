@@ -1,14 +1,14 @@
-interface TaxBreakdown {
+export type TaxBreakdown = {
   bracketTax: { min: number; max?: number; tax: number }[];
   totalTax: number;
   effectiveRate: number;
-}
+};
 
-interface TaxBracket {
+export type TaxBracket = {
   min: number;
   max?: number;
   rate: number;
-}
+};
 
 export const calculateTax = (
   income: number,
