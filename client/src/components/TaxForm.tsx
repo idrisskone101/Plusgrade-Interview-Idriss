@@ -37,7 +37,7 @@ const TaxForm = ({
       setTaxInfo(result);
     } catch (err) {
       console.log("err", err);
-      setError("Failed to calculate tax");
+      setError("Failed to calculate tax - Try again");
     } finally {
       setLoading(false);
     }

@@ -27,7 +27,7 @@ export const calculateTax = (
       bracketMax - bracketMin
     );
 
-    const tax = taxableInBracket * bracket.rate;
+    const tax = Math.round(taxableInBracket * bracket.rate);
     totalTax += tax;
 
     return { min: bracketMin, max: bracket.max, tax };
@@ -35,7 +35,7 @@ export const calculateTax = (
 
   return {
     bracketTax,
-    totalTax,
-    effectiveRate: totalTax / income,
+    totalTax: Math.round(totalTax),
+    effectiveRate: (Math.round((totalTax / income) * 10) / 10) * 100,
   };
 };
