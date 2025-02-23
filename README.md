@@ -23,7 +23,4 @@ docker run --init -p 5001:5001 -it ptsdocker16/interview-test-server
 
 ## Screenshot
 ![Screenshot 2025-02-23 at 2 22 16 PM](https://github.com/user-attachments/assets/dbff2191-27a6-49b9-856c-54ba899e74f8)
-
----
-This project follows best practices for **code structure, scalability, and maintainability**.
  
