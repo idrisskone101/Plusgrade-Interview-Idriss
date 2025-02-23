@@ -1,7 +1,10 @@
 import { TaxBreakdown } from "../types/tax";
 
 const LoadingSpinner = () => (
-  <div className="flex justify-center items-center">
+  <div
+    data-testid="loading-spinner"
+    className="flex justify-center items-center"
+  >
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
   </div>
 );
@@ -16,7 +19,10 @@ const TaxResults = ({
   error: string;
 }) => {
   return (
-    <div className="flex flex-col gap-4 mt-10 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <div
+      data-testid="tax-results"
+      className="flex flex-col gap-4 mt-10 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg"
+    >
       {loading && <LoadingSpinner />}
       {error && <p className="text-red-500 font-medium">{error}</p>}
       {taxInfo && (

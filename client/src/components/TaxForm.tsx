@@ -52,7 +52,11 @@ const TaxForm = ({
   const availableTaxYears = [2019, 2020, 2021, 2022];
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form
+      data-testid="tax-form"
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-4"
+    >
       <div>
         <label htmlFor="income" className="block text-sm font-medium">
           Annual Income
