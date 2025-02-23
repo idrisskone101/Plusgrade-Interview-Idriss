@@ -28,7 +28,7 @@ const TaxResults = ({
       {taxInfo && (
         <div className="space-y-4">
           <h2 className="text-2xl font-bold text-gray-800">Tax Results</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="bg-blue-50 p-4 rounded-lg">
               <p className="text-sm text-gray-600">Total Tax</p>
               <p className="text-xl font-bold text-blue-600">
