@@ -1,4 +1,4 @@
-import { TaxBreakdown } from "../utils/calculateTax";
+import { TaxBreakdown } from "../types/tax";
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center">

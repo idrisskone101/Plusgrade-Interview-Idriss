@@ -1,21 +1,14 @@
-export type TaxBreakdown = {
-  bracketTax: { min: number; max?: number; tax: number }[];
-  totalTax: number;
-  effectiveRate: number;
-};
-
-export type TaxBracket = {
-  min: number;
-  max?: number;
-  rate: number;
-};
+import { TaxCalculationError } from "../types/error";
+import { TaxBracket, TaxBreakdown } from "../types/tax";
 
 export const calculateTax = (
   income: number,
   brackets: TaxBracket[]
 ): TaxBreakdown | null => {
-  if (!brackets.length) {
-    throw new Error("No tax brackets available");
+  if (!brackets?.length) {
+    const error = new Error("No tax brackets available");
+    (error as TaxCalculationError).status = 500;
+    throw error;
   }
   if (income <= 0) return { bracketTax: [], totalTax: 0, effectiveRate: 0 };
 

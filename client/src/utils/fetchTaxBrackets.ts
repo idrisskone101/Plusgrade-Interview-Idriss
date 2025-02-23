@@ -1,8 +1,4 @@
-interface TaxBracket {
-  min: number;
-  max?: number;
-  rate: number;
-}
+import { TaxBracket } from "../types/tax";
 
 export const fetchTaxBrackets = async (year: number): Promise<TaxBracket[]> => {
   const res = await fetch(

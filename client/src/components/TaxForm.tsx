@@ -1,8 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { calculateTax, TaxBreakdown } from "../utils/calculateTax";
+import { calculateTax } from "../utils/calculateTax";
 import { fetchTaxBrackets } from "../utils/fetchTaxBrackets";
 import { taxFormSchema, TaxFormInputs } from "../schemas/taxFormSchema";
+import { type TaxCalculationError } from "../types/error";
+import { TaxBreakdown } from "../types/tax";
 
 const TaxForm = ({
   setTaxInfo,
@@ -35,9 +37,13 @@ const TaxForm = ({
       const brackets = await fetchTaxBrackets(data.taxYear);
       const result = calculateTax(data.income, brackets);
       setTaxInfo(result);
-    } catch (err) {
-      console.log("err", err);
-      setError("Failed to calculate tax - Try again");
+    } catch (err: unknown) {
+      const error = err as TaxCalculationError;
+      if (error.status === 500) {
+        setError("Server temporarily unavailable. Please try again.");
+      } else {
+        setError("Failed to calculate tax - Try again");
+      }
     } finally {
       setLoading(false);
     }
@@ -52,16 +58,22 @@ const TaxForm = ({
           Annual Income
         </label>
         <div className="relative mt-1">
-          <span className="absolute left-3 top-2">$</span>
+          <span className="absolute left-3 top-2" aria-hidden="true">
+            $
+          </span>
           <input
             type="number"
             id="income"
+            aria-label="Annual Income"
+            aria-describedby="income-description"
             {...register("income", { valueAsNumber: true })}
             className="block w-full rounded-md border-gray-300 shadow-sm py-2 pl-7 pr-3"
           />
         </div>
         {errors.income && (
-          <p className="mt-1 text-sm text-red-600">{errors.income.message}</p>
+          <p className="mt-1 text-sm text-red-600" role="alert">
+            {errors.income.message}
+          </p>
         )}
       </div>
 
@@ -71,6 +83,8 @@ const TaxForm = ({
         </label>
         <select
           id="taxYear"
+          aria-label="Tax Year"
+          aria-describedby="taxYear-description"
           {...register("taxYear", { valueAsNumber: true })}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm py-2 px-3"
         >
@@ -81,7 +95,9 @@ const TaxForm = ({
           ))}
         </select>
         {errors.taxYear && (
-          <p className="mt-1 text-sm text-red-600">{errors.taxYear.message}</p>
+          <p className="mt-1 text-sm text-red-600" role="alert">
+            {errors.taxYear.message}
+          </p>
         )}
       </div>
 
