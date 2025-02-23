@@ -33,6 +33,8 @@ export const calculateTax = (
     return { min: bracketMin, max: bracket.max, tax };
   });
 
+  if (income <= 0) return { bracketTax, totalTax: 0, effectiveRate: 0 };
+
   return {
     bracketTax,
     totalTax: Math.round(totalTax),
