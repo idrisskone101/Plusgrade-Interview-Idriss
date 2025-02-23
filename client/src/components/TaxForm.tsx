@@ -17,6 +17,7 @@ const TaxForm = ({
   loading: boolean;
   setLoading: (loading: boolean) => void;
 }) => {
+  // React Hook Form setup along with Zod validation
   const {
     register,
     handleSubmit,
@@ -29,12 +30,15 @@ const TaxForm = ({
     },
   });
 
+  // Handles form submission
   const onSubmit = async (data: TaxFormInputs) => {
     setLoading(true);
     setError("");
     setTaxInfo(null);
     try {
+      // Fetches tax brackets based on the selected tax year
       const brackets = await fetchTaxBrackets(data.taxYear);
+      // Calculates total tax, tax per band and effective tax rate
       const result = calculateTax(data.income, brackets);
       setTaxInfo(result);
     } catch (err: unknown) {
