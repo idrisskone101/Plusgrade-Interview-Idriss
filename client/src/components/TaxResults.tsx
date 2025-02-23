@@ -36,27 +36,29 @@ const TaxResults = ({
               </p>
             </div>
           </div>
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-3">
-              Tax Breakdown
-            </h3>
-            <div className="space-y-2">
-              {taxInfo.bracketTax.map((bracket) => (
-                <div
-                  key={bracket.min}
-                  className="bg-gray-50 p-3 rounded-md flex justify-between items-center"
-                >
-                  <span className="text-gray-600">
-                    ${bracket.min.toLocaleString()} -{" "}
-                    {bracket.max ? `$${bracket.max.toLocaleString()}` : "∞"}
-                  </span>
-                  <span className="font-medium text-gray-800">
-                    ${bracket.tax.toLocaleString()}
-                  </span>
-                </div>
-              ))}
+          {taxInfo.bracketTax.length > 0 && (
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold text-gray-700 mb-3">
+                Tax Breakdown
+              </h3>
+              <div className="space-y-2">
+                {taxInfo.bracketTax.map((bracket) => (
+                  <div
+                    key={bracket.min}
+                    className="bg-gray-50 p-3 rounded-md flex justify-between items-center"
+                  >
+                    <span className="text-gray-600">
+                      ${bracket.min.toLocaleString()} -{" "}
+                      {bracket.max ? `$${bracket.max.toLocaleString()}` : "∞"}
+                    </span>
+                    <span className="font-medium text-gray-800">
+                      ${bracket.tax.toLocaleString()}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>
